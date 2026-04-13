@@ -157,9 +157,10 @@ export default function ShowcasePage() {
       <section className="max-w-6xl mx-auto px-4 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {SHOWCASE.map((item) => (
-            <article
+            <a
               key={item.id}
-              className="group relative bg-white/[0.015] border border-white/[0.04] rounded-2xl overflow-hidden hover:border-white/[0.08] transition-all duration-300"
+              href={"/storymode/" + item.id}
+              className="group relative bg-white/[0.015] border border-white/[0.04] rounded-2xl overflow-hidden hover:border-white/[0.08] transition-all duration-300 block"
             >
               {/* Image */}
               <div className="aspect-square relative overflow-hidden">
@@ -184,6 +185,11 @@ export default function ShowcasePage() {
                 >
                   {item.status}
                 </div>
+                
+                {/* Storymode entry */}
+                <div className="absolute top-4 left-4 text-[9px] font-bold tracking-[1px] px-3 py-1.5 rounded backdrop-blur-sm bg-white/10 text-white/70 border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                  ▶ STORYMODE
+                </div>
 
                 {/* Bottom info overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -201,19 +207,32 @@ export default function ShowcasePage() {
                   <div className="flex items-center justify-between mt-3">
                     <span className="text-[10px] text-white/30 font-mono">{item.platform}</span>
                     {item.id === "strainchain" ? (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] font-semibold px-3 py-1 rounded-full transition-all"
-                        style={{
-                          background: `${item.color}15`,
-                          color: item.color,
-                          border: `1px solid ${item.color}30`,
-                        }}
-                      >
-                        Visit StrainChain.io →
-                      </a>
+                      <span className="flex gap-2">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-[10px] font-semibold px-3 py-1 rounded-full transition-all"
+                          style={{
+                            background: `${item.color}15`,
+                            color: item.color,
+                            border: `1px solid ${item.color}30`,
+                          }}
+                        >
+                          StrainChain.io
+                        </a>
+                        <span
+                          className="text-[10px] font-semibold px-3 py-1 rounded-full"
+                          style={{
+                            background: "rgba(255,255,255,0.05)",
+                            color: "rgba(255,255,255,0.5)",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                          }}
+                        >
+                          ▶ Story
+                        </span>
+                      </span>
                     ) : (
                       <span
                         className="text-[10px] font-semibold px-3 py-1 rounded-full"
@@ -229,7 +248,7 @@ export default function ShowcasePage() {
                   </div>
                 </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </section>
